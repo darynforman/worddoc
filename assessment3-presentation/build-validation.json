@@ -1,0 +1,20 @@
+{
+  "slides": 20,
+  "main_slides": 15,
+  "appendix_slides": 5,
+  "measured_runs": 18,
+  "source_csv_sha256": "01019da147d3c0d6e1a111f735e4e6942e05955b035223581c8cfab61514db28",
+  "source_documents": [
+    "/home/daryn-forman/Documents/ImageLab_Assessment_3_SSE_Brief.docx",
+    "/home/daryn-forman/Documents/ImageLab_Version_3_SSE_Requirements.docx.pdf"
+  ],
+  "layout_warnings": [],
+  "pdf_preview": "Raster slide preview generated from the same layout primitives; not a PowerPoint application export.",
+  "package_validation": {
+    "xml_parts_parsed": 114,
+    "all_relationship_targets_resolve": true,
+    "notes_slides": 20,
+    "chart_repetitions": 18,
+    "no_duplicate_or_missing_parts": true
+  }
+}
