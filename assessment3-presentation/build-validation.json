@@ -1,6 +1,6 @@
 {
-  "slides": 20,
-  "main_slides": 15,
+  "slides": 24,
+  "main_slides": 19,
   "appendix_slides": 5,
   "measured_runs": 18,
   "source_csv_sha256": "01019da147d3c0d6e1a111f735e4e6942e05955b035223581c8cfab61514db28",
@@ -11,11 +11,10 @@
   "layout_warnings": [],
   "pdf_preview": "Raster slide preview generated from the same layout primitives; not a PowerPoint application export.",
   "package_validation": {
-    "xml_parts_parsed": 114,
-    "all_relationship_targets_resolve": true,
-    "notes_slides": 20,
-    "chart_repetitions_per_figure": 18,
-    "direct_run_labels_per_figure": 6
-  },
-  "chart_revision": "Three horizontal panels; directly labelled medians and repetitions; explicit axes. Measurement data unchanged."
+    "xml_parts_parsed": 130,
+    "all_relationships_resolve": true,
+    "notes_slides": 24,
+    "chart_slides": 6,
+    "individual_run_markers_per_chart": 6
+  }
 }

@@ -101,7 +101,7 @@ for i,yy in enumerate([292,402,512]):
  s.shape(1360,yy,310,66,WHITE,kind='roundRect');s.text(1384,yy+16,265,45,['queued  ·  v1','processing  ·  v2','completed  ·  v6'][i],15,INK,True)
 s.text(1310,690,410,95,'ONE GET\nMULTIPLE SNAPSHOTS',17,PALE,True,align='center')
 s.text(100,802,1050,90,'Daryn Forman\nAssessment 3  •  16 November 2026',19,WHITE)
-s.note(25,'My project extends ImageLab with Server-Sent Events. I will show how one streaming response delivers changing job snapshots, demonstrate the observer lifecycle, and compare SSE with long polling using the recorded 18-run experiment. The main presentation is approximately 14 minutes; detailed tables and answers are in the appendix.','Both supplied Assessment 3 documents; assessment3/results/measured-suite.')
+s.note(25,'My project extends ImageLab with Server-Sent Events. I will show how one streaming response delivers changing job snapshots, demonstrate the observer lifecycle, and compare SSE with long polling using the recorded 18-run experiment. The main presentation is approximately 13–15 minutes; detailed tables and answers are in the appendix.','Both supplied Assessment 3 documents; assessment3/results/measured-suite.')
 
 # 02 — pipeline
 s=Slide('The worker owns processing. PostgreSQL owns state.',subtitle='SSE changes observation; the existing image pipeline stays in place.')
@@ -176,48 +176,41 @@ s.text(100,906,1710,64,'Recorded timing differs slightly: SSE stamps before JSON
 s.note(50,'Separate the work itself from noticing its completion. Processing uses PostgreSQL started_at and completed_at or failed_at. Detection delay subtracts the server timestamp recorded immediately after the terminal transaction commits from the browser receipt timestamp. Browser and server share one host, and integer-millisecond resolution includes scheduling and clock uncertainty. There is a small inconsistency in the retained build: SSE timestamps its event callback before parsing JSON while long polling records after response.json. The current code aligns both after JSON decoding, but the earlier recorded values have not been silently changed. Do not overinterpret differences of a few milliseconds. SSE stream GETs, named events and heartbeat comments are separate counts. Full version sequences are in raw client logs, with gaps summarized in CSV.','internal/data/jobs.go: committed; assessment3/experiment.py: summarize; runs.csv; historical source hashes; current web/assets/app.js.')
 
 # Charts — native editable vector shapes, recomputed from source CSV.
-def chart(metric,title,ticks,maxv,takeaway):
- is_get=metric=='observation_gets'
- s=Slide(title,section='MEASURED RESULTS',subtitle='Three repetitions per method. Large values show the median.',source='Source: measured-suite/runs.csv  •  Recorded build, 8 Nov 2026  •  n = 3 per method / condition')
- s.text(98,251,1724,40,'Dots: individual runs   •   Dark bar: median   •   Horizontal line: minimum–maximum',16,MUTED)
- for index,c in enumerate('ABC'):
-  panel=96+index*588
-  s.shape(panel,305,552,621,WHITE,outline=LINE,kind='roundRect')
-  s.text(panel+24,326,504,65,{'A':'A  Quiet interval','B':'B  Real progress','C':'C  Frequent updates'}[c],23,INK,True)
-  label={'A':'30-second quiet phase','B':'Real variant milestones','C':'10 s simulation · 200 ms'}[c]
-  s.text(panel+24,387,504,42,label,16,MUTED)
-  left=panel+57;right=panel+495
-  limit=(6 if c in 'AB' else 60) if is_get else 50
-  X=lambda value:left+float(value)/limit*(right-left)
-  axis_ticks=([0,2,4,6] if c in 'AB' else [0,20,40,60]) if is_get else [0,10,20,30,40,50]
-  for tick in axis_ticks:
-   xx=X(tick);s.line(xx,492,xx,793,'EAF0EC',1)
-  for mode,header_y,plot_y,col in [('sse',449,541,TEAL),('long',642,734,PURPLE)]:
-   vals=[float(r[metric]) for r in ROWS if r['condition']==c and r['mode']==mode]
+# Each condition gets a full slide. Keep the visual comparison to two columns.
+for metric in ['observation_gets','detection_ms']:
+ for condition in 'ABC':
+  is_get=metric=='observation_gets'
+  workload={'A':'Quiet interval','B':'Real progress','C':'Frequent updates'}[condition]
+  labels={('observation_gets','A'):'SSE used one observation GET; long polling used six.',
+          ('observation_gets','B'):'SSE used one observation GET; long polling used five.',
+          ('observation_gets','C'):'Median observation GETs: 1 with SSE, 55 with long polling.',
+          ('detection_ms','A'):'Median detection: 9 ms with SSE, 10 ms with long polling.',
+          ('detection_ms','B'):'Long polling had the lower recorded median: 10 ms versus 13 ms.',
+          ('detection_ms','C'):'Long polling ranged from 12–45 ms; SSE ranged from 8–20 ms.'}
+  title=workload+(': observation GETs' if is_get else ': completion-detection delay')
+  s=Slide(title,section='MEASURED RESULTS / CONDITION '+condition,subtitle=labels[metric,condition],source='Recorded suite: 8 Nov 2026  •  3 runs per method  •  Historical headless build  •  Source: runs.csv')
+  s.text(98,263,1724,48,'Columns: median   •   Circles: individual runs   •   Whiskers: minimum–maximum',18,MUTED)
+  limit=(6 if condition in 'AB' else 60) if is_get else 50
+  ticks=([0,1,2,3,4,5,6] if condition in 'AB' else [0,10,20,30,40,50,60]) if is_get else [0,10,20,30,40,50]
+  top=365;bottom=785;Y=lambda v:bottom-float(v)/limit*(bottom-top)
+  s.text(99,321,1710,42,'Observation HTTP GET count' if is_get else 'Completion-detection delay (milliseconds)',17,MUTED)
+  for tick in ticks:
+   yy=Y(tick);s.line(205,yy,1780,yy,LINE,1)
+   s.text(100,yy-19,78,49,str(tick),20,MUTED,align='right')
+  for mode,center,col in [('sse',650,TEAL),('long',1390,PURPLE)]:
+   vals=[float(r[metric]) for r in ROWS if r['condition']==condition and r['mode']==mode]
    med=statistics.median(vals);lo=min(vals);hi=max(vals)
-   s.text(panel+26,header_y,250,56,'SSE' if mode=='sse' else 'Long polling',19,col,True)
-   s.text(panel+252,header_y-10,274,74,n(med)+(' GET' if is_get and med==1 else ' GETs' if is_get else ' ms'),29,col,True,align='right')
-   if is_get:
-    s.shape(left,plot_y-15,max(2,X(med)-left),30,PALE if mode=='sse' else LAV)
-   s.line(X(lo),plot_y,X(hi),plot_y,col,5)
-   s.line(X(lo),plot_y-14,X(lo),plot_y+14,col,3)
-   s.line(X(hi),plot_y-14,X(hi),plot_y+14,col,3)
-   for j,value in enumerate(vals):
-    yy=plot_y+(j-1)*19
-    s.shape(X(value)-9,yy-9,18,18,col,kind='ellipse')
-   s.shape(X(med)-4,plot_y-28,8,56,INK)
-   unit='GETs' if is_get else 'ms'
-   s.text(panel+26,plot_y+47,500,44,'Runs 1 / 2 / 3:  '+' / '.join(n(v) for v in vals)+' '+unit,16,MUTED)
-  s.line(left,820,right,820,LINE,2)
-  for tick in axis_ticks:
-   xx=X(tick);s.line(xx,815,xx,826,MUTED,2);s.text(xx-29,835,58,45,str(tick),16,MUTED,align='center')
-  s.text(panel+24,884,504,40,'Observation GET count' if is_get else 'Completion-detection delay (ms)',15,INK,align='center')
- s.text(98,950,1724,50,'Panel axes differ: A/B 0–6 GETs; C 0–60 GETs. Compare labelled values across conditions.' if is_get else 'All panels share a 0–50 ms axis. Ranges overlap; these runs do not establish a universal speed advantage.',16,INK)
- return s
-s=chart('observation_gets','SSE used one GET; long-poll GETs rose with updates.',[0,10,20,30,40,50,60],60,'Median GETs: A  1 vs 6     •     B  1 vs 5     •     C  1 vs 55   (SSE vs long polling)')
-s.note(45,'The first required graph uses three horizontal panels and directly labels each median. Dots and the printed run values show every repetition; the dark bar marks the median and the horizontal line the minimum–maximum. To keep small counts readable, A and B use a zero-to-six GET axis while C uses zero-to-sixty. Compare labelled numerical values across conditions rather than bar lengths. Upload is excluded. SSE used one stream GET in every recorded run. Long polling used six GETs in A, five in B and fifty-four to fifty-five in C, with a median of fifty-five. The graph makes the workload-dependent rise easier to see than the raw table. An open SSE response still holds a handler and subscriber and sends events and heartbeats. These counts do not measure TCP connection establishments or total CPU and memory use.','runs.csv; summary.csv; mandatory graph 1; appendices A–C.')
-s=chart('detection_ms','SSE did not always detect completion faster.',[0,10,20,30,40,50],50,'Median delay (ms): A  9 vs 10     •     B  13 vs 10     •     C  9 vs 12   (SSE vs long polling)')
-s.note(45,'The second required graph uses three horizontal panels with the same zero-to-fifty millisecond axis. Each method is directly labelled with its median, with all three runs shown as dots and printed below; the line spans minimum to maximum. It plots browser completion-detection delay using the recorded timestamp method. SSE medians were nine, thirteen and nine milliseconds in A, B and C. Long polling medians were ten, ten and twelve. Long polling was faster at the median in B. The forty-five millisecond long-poll repetition in C widens its range; the graph prevents the median from hiding that individual run. With three repetitions and local scheduling, clock and timestamp-placement uncertainty, this does not prove a universal latency advantage. Processing duration is a different metric.','runs.csv; summary.csv; mandatory graph 2; historical timestamp caveat on slide 9.')
+   s.shape(center-160,Y(med),320,bottom-Y(med),col)
+   s.line(center,Y(lo),center,Y(hi),INK,5)
+   s.line(center-60,Y(lo),center+60,Y(lo),INK,4)
+   s.line(center-60,Y(hi),center+60,Y(hi),INK,4)
+   for rep,value in enumerate(vals):
+    xx=center+(rep-1)*58
+    s.shape(xx-13,Y(value)-13,26,26,WHITE,outline=INK,kind='ellipse',stroke=3)
+   s.text(center-320,822,640,72,'SSE' if mode=='sse' else 'Long polling',26,col,True,align='center')
+   value=n(med)+(' GET' if is_get and med==1 else ' GETs' if is_get else ' ms')
+   s.text(center-320,893,640,88,value,34,INK,True,align='center')
+  s.note(20,'Condition '+condition+': '+workload+'. '+labels[metric,condition]+   ' The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. '+   ('Observation GETs exclude the upload POST and count HTTP requests, not TCP connections. A and B use a zero-to-six GET axis and C uses zero-to-sixty, so compare numerical values rather than column heights across those slides. Fewer GETs do not establish lower total resource use.' if is_get else    'All three detection slides share the zero-to-fifty millisecond scale. These are local measurements with three repetitions and timing uncertainty. They do not establish a universal speed advantage. Processing duration is separate. The historical build used slightly different receipt-timestamp placement between the modes; see slide 9.'),   'assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph '+('1' if is_get else '2')+'.')
 
 # 12 — summary table
 s=Slide('The summary table anchors both graphs.',section='MEASURED RESULTS',subtitle='Medians; brackets show minimum–maximum ranges. Every repetition is in the appendix.',source='Source: measured-suite/summary.csv  •  Full underlying records: runs.csv + per-run client.json/server.log')
@@ -328,11 +321,11 @@ with zipfile.ZipFile(name,'w',zipfile.ZIP_DEFLATED) as z:
  for k,v in files.items():z.writestr(k,v)
 # Self-contained PDF preview: rasterized at 144 dpi from identical design primitives.
 SLIDES[0].img.save(OUT/'ImageLab_Assessment_3_Slide_Preview.pdf',save_all=True,append_images=[s.img for s in SLIDES[1:]],resolution=144)
-contact=Image.new('RGB',(1920,5*300),(228,234,230));d=ImageDraw.Draw(contact)
+contact=Image.new('RGB',(1920,math.ceil(len(SLIDES)/4)*300),(228,234,230));d=ImageDraw.Draw(contact)
 for idx,s in enumerate(SLIDES):
  thumb=s.img.resize((456,257),Image.Resampling.LANCZOS);x=(idx%4)*480+12;y=(idx//4)*300+8;contact.paste(thumb,(x,y));d.text((x,y+261),str(idx+1).zfill(2)+'  '+s.title[:48],font=font(6),fill='#'+INK)
 contact.save(OUT/'slide-overview.png')
-notes=['# ImageLab Assessment 3 — speaker notes','','15 main slides, approximately 14 minutes, plus 5 minutes for questions. Slides 16–20 are backup material.','The recorded experiment is historical; foreground-browser rerun remains outstanding.','']
+notes=['# ImageLab Assessment 3 — speaker notes','','19 main slides, approximately 13–15 minutes including the live demonstration, plus 5 minutes for questions. Slides 20–24 are backup material. Spend about 20 seconds on each chart slide.','The recorded experiment is historical; foreground-browser rerun remains outstanding.','']
 for i,s in enumerate(SLIDES,1):notes.extend([f'## Slide {i}: {s.title}','',s.notes,''])
 (OUT/'SPEAKER_NOTES.md').write_text('\n'.join(notes))
 # Requirements mapping and source provenance are supplied without cluttering slides.
@@ -346,23 +339,23 @@ Source documents: ImageLab_Assessment_3_SSE_Brief.docx and ImageLab_Version_3_SS
 | SSE request, headers, named frames, flush and no id fields | 4; live DevTools demo on 7 |
 | Committed versions, notifications, multiple observers | 5–7 |
 | Reconnect, stop/resume, completed and failed lifecycle | 6–7 |
-| Long-poll comparison | 3, 8, 10–14 |
+| Long-poll comparison | 3, 8, 10–18 |
 | Predictions, controls and experiment matrix | 8 |
 | Measurement definitions and timestamp method | 9 |
-| GET graph: repetitions, median, min–max, axes and legend | 10 |
-| Detection-delay graph with the same visual requirements | 11 |
-| Summary measurement table | 12 |
-| Every measured repetition in tables | 16–18 |
-| Version gaps and resource trade-offs | 13 |
-| Recommendation and limitations | 14 |
-| Reproducibility and tests | 19 |
-| Required questions and answers | 20 + speaker notes |
+| GET graphs: repetitions, median, min–max, axes and legend | 10–12 |
+| Detection-delay graphs with the same visual requirements | 13–15 |
+| Summary measurement table | 16 |
+| Every measured repetition in tables | 20–22 |
+| Version gaps and resource trade-offs | 17 |
+| Recommendation and limitations | 18 |
+| Reproducibility and tests | 23 |
+| Required questions and answers | 24 + speaker notes |
 
 The live DevTools demonstration is a presentation activity, not an embedded recording.
 Historical measurements used headless Firefox, prior to recent compliance and timing fixes.
 Do not call the foreground-browser measurement requirement complete. Do not describe the
 controlled server-stream interruption as proof of every real network-outage behavior.
 ''')
-manifest={'slides':len(SLIDES),'main_slides':15,'appendix_slides':5,'measured_runs':len(ROWS),'source_csv_sha256':hashlib.sha256((DATA/'runs.csv').read_bytes()).hexdigest(),'source_documents':[str(ROOT.parent/'ImageLab_Assessment_3_SSE_Brief.docx'),str(ROOT.parent/'ImageLab_Version_3_SSE_Requirements.docx.pdf')],'layout_warnings':WARNINGS,'pdf_preview':'Raster slide preview generated from the same layout primitives; not a PowerPoint application export.'}
+manifest={'slides':len(SLIDES),'main_slides':19,'appendix_slides':5,'measured_runs':len(ROWS),'source_csv_sha256':hashlib.sha256((DATA/'runs.csv').read_bytes()).hexdigest(),'source_documents':[str(ROOT.parent/'ImageLab_Assessment_3_SSE_Brief.docx'),str(ROOT.parent/'ImageLab_Version_3_SSE_Requirements.docx.pdf')],'layout_warnings':WARNINGS,'pdf_preview':'Raster slide preview generated from the same layout primitives; not a PowerPoint application export.'}
 (OUT/'build-validation.json').write_text(json.dumps(manifest,indent=2))
 print(json.dumps(manifest,indent=2));print(name)

@@ -3,11 +3,11 @@
 Open **ImageLab_Assessment_3_Daryn_Forman.pptx** in PowerPoint or a compatible presentation application.
 It is a 16:9 deck with editable text, diagrams, vector graphs and numerical tables.
 
-- Slides 1–15: main presentation, approximately 12–15 minutes including a short live demonstration.
-- Slides 16–20: backup tables, reproducibility notes and the required discussion questions.
+- Slides 1–19: main presentation, approximately 12–15 minutes including a short live demonstration.
+- Slides 20–24: backup tables, reproducibility notes and the required discussion questions.
 - Speaker notes are embedded in every slide and also supplied in SPEAKER_NOTES.md.
 - The PDF is a visual slide preview generated from the same layout primitives, not an application-exported PDF.
-- slide-overview.png provides a quick view of all twenty slides.
+- slide-overview.png provides a quick view of all twenty-four slides.
 - REQUIREMENTS_COVERAGE.md maps content to both supplied documents.
 - source-data/ preserves the numerical inputs and recorded experiment metadata used by the deck.
 
@@ -42,10 +42,10 @@ python3 build_presentation.py --project /path/to/test3 --out /path/to/new-output
 The builder reuses only the existing Assessment 2 file's standard PowerPoint theme/layout
 infrastructure; all Assessment 3 slide content, diagrams, tables and charts are rebuilt.
 
-## Chart readability revision
+## Full-size chart layout
 
-Slides 10 and 11 now use three separate condition panels, direct method labels,
-large median values, all three run values, and plotted repetitions plus min–max.
-The GET panels use explicitly labelled 0–6 axes for A/B and 0–60 for C; compare
-the numbers, not bar lengths, across conditions. Delay panels all share 0–50 ms.
-The measurements have not changed.
+Chart slides 10–15 each show one condition and one metric, with two large median
+columns, directly labelled method/value pairs, three individual run markers and
+minimum–maximum whiskers. Detailed run tables remain in the appendix. GET axes
+are 0–6 for A/B and 0–60 for C; all delay charts use 0–50 ms. Compare numerical
+values across slides. Data is unchanged. Allow about 20 seconds per chart slide.
