@@ -1,6 +1,6 @@
 {
-  "slides": 24,
-  "main_slides": 19,
+  "slides": 20,
+  "main_slides": 15,
   "appendix_slides": 5,
   "measured_runs": 18,
   "source_csv_sha256": "01019da147d3c0d6e1a111f735e4e6942e05955b035223581c8cfab61514db28",
@@ -11,12 +11,15 @@
   "layout_warnings": [],
   "pdf_preview": "Raster slide preview generated from the same layout primitives; not a PowerPoint application export.",
   "package_validation": {
-    "xml_parts_parsed": 130,
+    "xml_parts_parsed": 114,
     "all_relationships_resolve": true,
-    "chart_slides": 6,
-    "both_axes_labelled": true,
-    "run_markers_per_chart": 6,
-    "non_chart_slides_unchanged": true,
-    "explanatory_chart_subtitles_and_footers_removed": true
+    "slides": 20,
+    "chart_slides": [
+      10,
+      11
+    ],
+    "labelled_axes": true,
+    "plotted_repetitions_per_graph": 18,
+    "data_unchanged": true
   }
 }

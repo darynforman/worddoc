@@ -1,13 +1,13 @@
 # ImageLab Assessment 3 — speaker notes
 
-19 main slides, approximately 13–15 minutes including the live demonstration, plus 5 minutes for questions. Slides 20–24 are backup material. Spend about 20 seconds on each chart slide.
+15 main slides, approximately 12–15 minutes including the live demonstration, plus 5 minutes for questions. Slides 16–20 are backup material. Two graph slides compare all three conditions.
 The recorded experiment is historical; foreground-browser rerun remains outstanding.
 
 ## Slide 1: ImageLab
 
 Target time: 25 seconds.
 
-My project extends ImageLab with Server-Sent Events. I will show how one streaming response delivers changing job snapshots, demonstrate the observer lifecycle, and compare SSE with long polling using the recorded 18-run experiment. The main presentation is approximately 13–15 minutes; detailed tables and answers are in the appendix.
+My project extends ImageLab with Server-Sent Events. I will show how one streaming response delivers changing job snapshots, demonstrate the observer lifecycle, and compare SSE with long polling using the recorded 18-run experiment. The main presentation is approximately 12–15 minutes; detailed tables and answers are in the appendix.
 
 Evidence / references: Both supplied Assessment 3 documents; assessment3/results/measured-suite.
 
@@ -75,55 +75,23 @@ Separate the work itself from noticing its completion. Processing uses PostgreSQ
 
 Evidence / references: internal/data/jobs.go: committed; assessment3/experiment.py: summarize; runs.csv; historical source hashes; current web/assets/app.js.
 
-## Slide 10: Quiet interval: observation GETs
+## Slide 10: Observation GET count: SSE vs long polling
 
-Target time: 20 seconds.
+Target time: 45 seconds.
 
-Condition A: Quiet interval. SSE used one observation GET; long polling used six. The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. Observation GETs exclude the upload POST and count HTTP requests, not TCP connections. A and B use a zero-to-six GET axis and C uses zero-to-sixty, so compare numerical values rather than column heights across those slides. Fewer GETs do not establish lower total resource use.
-
-Evidence / references: assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph 1.
-
-## Slide 11: Real progress: observation GETs
-
-Target time: 20 seconds.
-
-Condition B: Real progress. SSE used one observation GET; long polling used five. The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. Observation GETs exclude the upload POST and count HTTP requests, not TCP connections. A and B use a zero-to-six GET axis and C uses zero-to-sixty, so compare numerical values rather than column heights across those slides. Fewer GETs do not establish lower total resource use.
+Observation GETs are compared across all three conditions on a single zero-to-sixty count axis. SSE medians are one, one and one; long-poll medians are six, five and fifty-five. The larger counts in C make the A/B columns shorter, so the large coloured values below each pair also state the exact medians. Upload is excluded. Count HTTP GETs, not TCP connections; fewer requests do not establish lower total resource cost. The vertical axis labels the metric and units; the horizontal axis labels workload condition. Within each group, teal SSE is left and purple long polling is right. Columns and the large coloured numbers show medians. Three outlined circles show the individual repetitions, separated horizontally when values match. Whiskers show minimum to maximum. Exact repetitions are in appendix slides 16–18. Source and build notes are intentionally in speaker notes to keep the visible graph clean. These are the historical headless Firefox runs from 8 November 2026, before recent format and timing fixes; the foreground rerun remains outstanding.
 
 Evidence / references: assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph 1.
 
-## Slide 12: Frequent updates: observation GETs
+## Slide 11: Completion-detection delay: SSE vs long polling
 
-Target time: 20 seconds.
+Target time: 45 seconds.
 
-Condition C: Frequent updates. Median observation GETs: 1 with SSE, 55 with long polling. The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. Observation GETs exclude the upload POST and count HTTP requests, not TCP connections. A and B use a zero-to-six GET axis and C uses zero-to-sixty, so compare numerical values rather than column heights across those slides. Fewer GETs do not establish lower total resource use.
-
-Evidence / references: assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph 1.
-
-## Slide 13: Quiet interval: completion-detection delay
-
-Target time: 20 seconds.
-
-Condition A: Quiet interval. Median detection: 9 ms with SSE, 10 ms with long polling. The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. All three detection slides share the zero-to-fifty millisecond scale. These are local measurements with three repetitions and timing uncertainty. They do not establish a universal speed advantage. Processing duration is separate. The historical build used slightly different receipt-timestamp placement between the modes; see slide 9.
+Completion-detection delay is compared across all three conditions on one zero-to-fifty millisecond axis. SSE medians are nine, thirteen and nine; long-poll medians are ten, ten and twelve. Long polling has the lower median in B. Its forty-five millisecond C repetition produces a longer range. Three repetitions on loopback with historical timing uncertainty do not establish a universal latency advantage. Processing duration is separate; see slide 9 for timestamp caveats. The vertical axis labels the metric and units; the horizontal axis labels workload condition. Within each group, teal SSE is left and purple long polling is right. Columns and the large coloured numbers show medians. Three outlined circles show the individual repetitions, separated horizontally when values match. Whiskers show minimum to maximum. Exact repetitions are in appendix slides 16–18. Source and build notes are intentionally in speaker notes to keep the visible graph clean. These are the historical headless Firefox runs from 8 November 2026, before recent format and timing fixes; the foreground rerun remains outstanding.
 
 Evidence / references: assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph 2.
 
-## Slide 14: Real progress: completion-detection delay
-
-Target time: 20 seconds.
-
-Condition B: Real progress. Long polling had the lower recorded median: 10 ms versus 13 ms. The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. All three detection slides share the zero-to-fifty millisecond scale. These are local measurements with three repetitions and timing uncertainty. They do not establish a universal speed advantage. Processing duration is separate. The historical build used slightly different receipt-timestamp placement between the modes; see slide 9.
-
-Evidence / references: assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph 2.
-
-## Slide 15: Frequent updates: completion-detection delay
-
-Target time: 20 seconds.
-
-Condition C: Frequent updates. Long polling ranged from 12–45 ms; SSE ranged from 8–20 ms. The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. All three detection slides share the zero-to-fifty millisecond scale. These are local measurements with three repetitions and timing uncertainty. They do not establish a universal speed advantage. Processing duration is separate. The historical build used slightly different receipt-timestamp placement between the modes; see slide 9.
-
-Evidence / references: assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph 2.
-
-## Slide 16: The summary table anchors both graphs.
+## Slide 12: The summary table anchors both graphs.
 
 Target time: 40 seconds.
 
@@ -131,7 +99,7 @@ Use this table to connect each graph back to the numerical summary. A shows a me
 
 Evidence / references: summary.csv; RESULTS.md; MEAS-06 to MEAS-09.
 
-## Slide 17: Fewer GETs do not remove observer work.
+## Slide 13: Fewer GETs do not remove observer work.
 
 Target time: 45 seconds.
 
@@ -139,7 +107,7 @@ Use C–SSE–1 as a concrete snapshot-coalescing example. The first and termina
 
 Evidence / references: C-sse-1/client.json; runs.csv; summary.csv; MEAS-05 and MEAS-10; snapshot semantics in both briefs.
 
-## Slide 18: Use SSE for progress; keep long polling available.
+## Slide 14: Use SSE for progress; keep long polling available.
 
 Target time: 45 seconds.
 
@@ -147,7 +115,7 @@ My recommendation is SSE where continuous progress over a held response fits the
 
 Evidence / references: run-selection.json; method.json; browser.json; assessment3/STATUS.md; both supplied briefs.
 
-## Slide 19: Questions
+## Slide 15: Questions
 
 Target time: 10 seconds.
 
@@ -155,7 +123,7 @@ Invite approximately five minutes of questions. Return to the wire-contract, syn
 
 Evidence / references: Assessment 3 suggested allocation: 10–15 minutes presenting plus 5 minutes questions.
 
-## Slide 20: Condition A — all six measured runs
+## Slide 16: Condition A — all six measured runs
 
 Target time: 0 seconds.
 
@@ -163,7 +131,7 @@ Backup table only: this slide retains all six measured repetitions for condition
 
 Evidence / references: assessment3/results/measured-suite/runs.csv; six A run folders.
 
-## Slide 21: Condition B — all six measured runs
+## Slide 17: Condition B — all six measured runs
 
 Target time: 0 seconds.
 
@@ -171,7 +139,7 @@ Backup table only: this slide retains all six measured repetitions for condition
 
 Evidence / references: assessment3/results/measured-suite/runs.csv; six B run folders.
 
-## Slide 22: Condition C — all six measured runs
+## Slide 18: Condition C — all six measured runs
 
 Target time: 0 seconds.
 
@@ -179,7 +147,7 @@ Backup table only: this slide retains all six measured repetitions for condition
 
 Evidence / references: assessment3/results/measured-suite/runs.csv; six C run folders.
 
-## Slide 23: Reproduce the evidence; keep demonstrations separate.
+## Slide 19: Reproduce the evidence; keep demonstrations separate.
 
 Target time: 0 seconds.
 
@@ -187,7 +155,7 @@ For a new experiment follow assessment3/README.md and use a dedicated initialize
 
 Evidence / references: README.md; Makefile; assessment3/README.md; assessment3/STATUS.md; recent demo verification.
 
-## Slide 24: Five questions to be ready for.
+## Slide 20: Five questions to be ready for.
 
 Target time: 0 seconds.
 

@@ -8,17 +8,17 @@ Source documents: ImageLab_Assessment_3_SSE_Brief.docx and ImageLab_Version_3_SS
 | SSE request, headers, named frames, flush and no id fields | 4; live DevTools demo on 7 |
 | Committed versions, notifications, multiple observers | 5–7 |
 | Reconnect, stop/resume, completed and failed lifecycle | 6–7 |
-| Long-poll comparison | 3, 8, 10–18 |
+| Long-poll comparison | 3, 8, 10–14 |
 | Predictions, controls and experiment matrix | 8 |
 | Measurement definitions and timestamp method | 9 |
-| GET graphs: repetitions, median, min–max, axes and legend | 10–12 |
-| Detection-delay graphs with the same visual requirements | 13–15 |
-| Summary measurement table | 16 |
-| Every measured repetition in tables | 20–22 |
-| Version gaps and resource trade-offs | 17 |
-| Recommendation and limitations | 18 |
-| Reproducibility and tests | 23 |
-| Required questions and answers | 24 + speaker notes |
+| GET graph: repetitions, median, min–max, axes and legend | 10 |
+| Detection-delay graph with the same visual requirements | 11 |
+| Summary measurement table | 12 |
+| Every measured repetition in tables | 16–18 |
+| Version gaps and resource trade-offs | 13 |
+| Recommendation and limitations | 14 |
+| Reproducibility and tests | 19 |
+| Required questions and answers | 20 + speaker notes |
 
 The live DevTools demonstration is a presentation activity, not an embedded recording.
 Historical measurements used headless Firefox, prior to recent compliance and timing fixes.

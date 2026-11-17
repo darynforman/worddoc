@@ -3,11 +3,11 @@
 Open **ImageLab_Assessment_3_Daryn_Forman.pptx** in PowerPoint or a compatible presentation application.
 It is a 16:9 deck with editable text, diagrams, vector graphs and numerical tables.
 
-- Slides 1–19: main presentation, approximately 12–15 minutes including a short live demonstration.
-- Slides 20–24: backup tables, reproducibility notes and the required discussion questions.
+- Slides 1–15: main presentation, approximately 12–15 minutes including a short live demonstration.
+- Slides 16–20: backup tables, reproducibility notes and the required discussion questions.
 - Speaker notes are embedded in every slide and also supplied in SPEAKER_NOTES.md.
 - The PDF is a visual slide preview generated from the same layout primitives, not an application-exported PDF.
-- slide-overview.png provides a quick view of all twenty-four slides.
+- slide-overview.png provides a quick view of all twenty slides.
 - REQUIREMENTS_COVERAGE.md maps content to both supplied documents.
 - source-data/ preserves the numerical inputs and recorded experiment metadata used by the deck.
 
@@ -42,23 +42,18 @@ python3 build_presentation.py --project /path/to/test3 --out /path/to/new-output
 The builder reuses only the existing Assessment 2 file's standard PowerPoint theme/layout
 infrastructure; all Assessment 3 slide content, diagrams, tables and charts are rebuilt.
 
-## Full-size chart layout
+## Two required graphs
 
-Chart slides 10–15 each show one condition and one metric, with two large median
-columns, directly labelled method/value pairs, three individual run markers and
-minimum–maximum whiskers. Detailed run tables remain in the appendix. GET axes
-are 0–6 for A/B and 0–60 for C; all delay charts use 0–50 ms. Compare numerical
-values across slides. Data is unchanged. Allow about 20 seconds per chart slide.
+Slides 10 and 11 are the only graph slides. Each compares SSE and long polling
+across conditions A, B and C in one full-slide grouped column chart.
 
-## Clean graph slides with explicit axes
+- X axis: Workload condition.
+- Y axis on slide 10: Observation GETs (count), zero to 60.
+- Y axis on slide 11: Completion-detection delay (ms), zero to 50.
+- Columns and large coloured values: medians.
+- Outlined circles: all three individual runs per method and condition.
+- Whiskers: minimum–maximum range.
 
-All six graph slides follow the supplied clean reference: section label, title,
-chart, method/value labels and page number. Explanatory subtitles and source
-footers are moved to the embedded speaker notes. A compact graphical legend
-identifies median columns, individual runs and minimum–maximum ranges.
-
-- X axis: Observation method.
-- Y axis on GET slides: Observation GETs (count).
-- Y axis on detection slides: Completion-detection delay (ms).
-
-The axes, legend, charts and labels are editable PowerPoint shapes/text.
+The visible slides retain the requested clean style. Interpretation, data sources
+and historical-build limitations remain in the speaker notes and other slides.
+The measurement data is unchanged.
