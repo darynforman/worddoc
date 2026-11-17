@@ -177,29 +177,47 @@ s.note(50,'Separate the work itself from noticing its completion. Processing use
 
 # Charts — native editable vector shapes, recomputed from source CSV.
 def chart(metric,title,ticks,maxv,takeaway):
- s=Slide(title,section='MEASURED RESULTS',subtitle='Individual repetitions with median and minimum–maximum range.',source='Source: assessment3/results/measured-suite/runs.csv  •  Recorded build, 8 Nov 2026  •  n = 3 per group')
- x0=205;x1=1750;y0=785;y1=320
- Y=lambda v:y0-float(v)/maxv*(y0-y1)
- for tick in ticks:
-  yy=Y(tick);s.line(x0,yy,x1,yy,LINE,1);s.text(100,yy-14,82,45,str(tick),15,MUTED,align='right')
- s.text(100,272,700,40,'Observation HTTP GETs' if metric=='observation_gets' else 'Completion-detection delay (ms)',15,MUTED)
- for idx,c in enumerate('ABC'):
-  center=440+idx*540
-  s.text(center-220,825,440,75,{'A':'A · Quiet interval','B':'B · Real progress','C':'C · Frequent updates'}[c],19,INK,True,align='center')
-  for mode,dx,col in [('sse',-90,TEAL),('long',90,PURPLE)]:
-   vals=[float(r[metric]) for r in ROWS if r['condition']==c and r['mode']==mode];xx=center+dx;lo=min(vals);hi=max(vals);med=statistics.median(vals)
-   s.line(xx,Y(lo),xx,Y(hi),col,4);s.line(xx-13,Y(lo),xx+13,Y(lo),col,3);s.line(xx-13,Y(hi),xx+13,Y(hi),col,3)
-   for j,v in enumerate(vals):s.shape(xx+(j-1)*23-8,Y(v)-8,16,16,col,kind='ellipse')
-   s.line(xx-35,Y(med),xx+35,Y(med),INK,5)
-   s.text(xx-110,max(285,Y(hi)-58),220,45,'median '+n(med),16,col,True,align='center')
- for xx,label,col in [(210,'SSE',TEAL),(400,'Long polling',PURPLE)]:s.shape(xx,910,19,19,col,kind='ellipse');s.text(xx+32,903,225,45,label,16,col,True)
- s.text(720,904,1080,45,'Dots: repetitions   |   Dark bar: median   |   Vertical line: min–max',15,MUTED)
- s.text(100,954,1710,46,takeaway,17,INK,True)
+ is_get=metric=='observation_gets'
+ s=Slide(title,section='MEASURED RESULTS',subtitle='Three repetitions per method. Large values show the median.',source='Source: measured-suite/runs.csv  •  Recorded build, 8 Nov 2026  •  n = 3 per method / condition')
+ s.text(98,251,1724,40,'Dots: individual runs   •   Dark bar: median   •   Horizontal line: minimum–maximum',16,MUTED)
+ for index,c in enumerate('ABC'):
+  panel=96+index*588
+  s.shape(panel,305,552,621,WHITE,outline=LINE,kind='roundRect')
+  s.text(panel+24,326,504,65,{'A':'A  Quiet interval','B':'B  Real progress','C':'C  Frequent updates'}[c],23,INK,True)
+  label={'A':'30-second quiet phase','B':'Real variant milestones','C':'10 s simulation · 200 ms'}[c]
+  s.text(panel+24,387,504,42,label,16,MUTED)
+  left=panel+57;right=panel+495
+  limit=(6 if c in 'AB' else 60) if is_get else 50
+  X=lambda value:left+float(value)/limit*(right-left)
+  axis_ticks=([0,2,4,6] if c in 'AB' else [0,20,40,60]) if is_get else [0,10,20,30,40,50]
+  for tick in axis_ticks:
+   xx=X(tick);s.line(xx,492,xx,793,'EAF0EC',1)
+  for mode,header_y,plot_y,col in [('sse',449,541,TEAL),('long',642,734,PURPLE)]:
+   vals=[float(r[metric]) for r in ROWS if r['condition']==c and r['mode']==mode]
+   med=statistics.median(vals);lo=min(vals);hi=max(vals)
+   s.text(panel+26,header_y,250,56,'SSE' if mode=='sse' else 'Long polling',19,col,True)
+   s.text(panel+252,header_y-10,274,74,n(med)+(' GET' if is_get and med==1 else ' GETs' if is_get else ' ms'),29,col,True,align='right')
+   if is_get:
+    s.shape(left,plot_y-15,max(2,X(med)-left),30,PALE if mode=='sse' else LAV)
+   s.line(X(lo),plot_y,X(hi),plot_y,col,5)
+   s.line(X(lo),plot_y-14,X(lo),plot_y+14,col,3)
+   s.line(X(hi),plot_y-14,X(hi),plot_y+14,col,3)
+   for j,value in enumerate(vals):
+    yy=plot_y+(j-1)*19
+    s.shape(X(value)-9,yy-9,18,18,col,kind='ellipse')
+   s.shape(X(med)-4,plot_y-28,8,56,INK)
+   unit='GETs' if is_get else 'ms'
+   s.text(panel+26,plot_y+47,500,44,'Runs 1 / 2 / 3:  '+' / '.join(n(v) for v in vals)+' '+unit,16,MUTED)
+  s.line(left,820,right,820,LINE,2)
+  for tick in axis_ticks:
+   xx=X(tick);s.line(xx,815,xx,826,MUTED,2);s.text(xx-29,835,58,45,str(tick),16,MUTED,align='center')
+  s.text(panel+24,884,504,40,'Observation GET count' if is_get else 'Completion-detection delay (ms)',15,INK,align='center')
+ s.text(98,950,1724,50,'Panel axes differ: A/B 0–6 GETs; C 0–60 GETs. Compare labelled values across conditions.' if is_get else 'All panels share a 0–50 ms axis. Ranges overlap; these runs do not establish a universal speed advantage.',16,INK)
  return s
 s=chart('observation_gets','SSE used one GET; long-poll GETs rose with updates.',[0,10,20,30,40,50,60],60,'Median GETs: A  1 vs 6     •     B  1 vs 5     •     C  1 vs 55   (SSE vs long polling)')
-s.note(45,'The first required graph plots the HTTP observation GETs started, excluding upload. Each group has all three individual repetitions, its median and minimum–maximum range. SSE used one stream GET in every recorded run. Long polling used six GETs in A, five in B and fifty-four to fifty-five in C, with a median of fifty-five. The graph makes the workload-dependent rise easier to see than the raw table. An open SSE response still holds a handler and subscriber and sends events and heartbeats. These counts do not measure TCP connection establishments or total CPU and memory use.','runs.csv; summary.csv; mandatory graph 1; appendices A–C.')
+s.note(45,'The first required graph uses three horizontal panels and directly labels each median. Dots and the printed run values show every repetition; the dark bar marks the median and the horizontal line the minimum–maximum. To keep small counts readable, A and B use a zero-to-six GET axis while C uses zero-to-sixty. Compare labelled numerical values across conditions rather than bar lengths. Upload is excluded. SSE used one stream GET in every recorded run. Long polling used six GETs in A, five in B and fifty-four to fifty-five in C, with a median of fifty-five. The graph makes the workload-dependent rise easier to see than the raw table. An open SSE response still holds a handler and subscriber and sends events and heartbeats. These counts do not measure TCP connection establishments or total CPU and memory use.','runs.csv; summary.csv; mandatory graph 1; appendices A–C.')
 s=chart('detection_ms','SSE did not always detect completion faster.',[0,10,20,30,40,50],50,'Median delay (ms): A  9 vs 10     •     B  13 vs 10     •     C  9 vs 12   (SSE vs long polling)')
-s.note(45,'The second required graph plots browser completion-detection delay in milliseconds using the recorded timestamp method. SSE medians were nine, thirteen and nine milliseconds in A, B and C. Long polling medians were ten, ten and twelve. Long polling was faster at the median in B. The forty-five millisecond long-poll repetition in C widens its range; the graph prevents the median from hiding that individual run. With three repetitions and local scheduling, clock and timestamp-placement uncertainty, this does not prove a universal latency advantage. Processing duration is a different metric.','runs.csv; summary.csv; mandatory graph 2; historical timestamp caveat on slide 9.')
+s.note(45,'The second required graph uses three horizontal panels with the same zero-to-fifty millisecond axis. Each method is directly labelled with its median, with all three runs shown as dots and printed below; the line spans minimum to maximum. It plots browser completion-detection delay using the recorded timestamp method. SSE medians were nine, thirteen and nine milliseconds in A, B and C. Long polling medians were ten, ten and twelve. Long polling was faster at the median in B. The forty-five millisecond long-poll repetition in C widens its range; the graph prevents the median from hiding that individual run. With three repetitions and local scheduling, clock and timestamp-placement uncertainty, this does not prove a universal latency advantage. Processing duration is a different metric.','runs.csv; summary.csv; mandatory graph 2; historical timestamp caveat on slide 9.')
 
 # 12 — summary table
 s=Slide('The summary table anchors both graphs.',section='MEASURED RESULTS',subtitle='Medians; brackets show minimum–maximum ranges. Every repetition is in the appendix.',source='Source: measured-suite/summary.csv  •  Full underlying records: runs.csv + per-run client.json/server.log')

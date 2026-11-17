@@ -14,7 +14,8 @@
     "xml_parts_parsed": 114,
     "all_relationship_targets_resolve": true,
     "notes_slides": 20,
-    "chart_repetitions": 18,
-    "no_duplicate_or_missing_parts": true
-  }
+    "chart_repetitions_per_figure": 18,
+    "direct_run_labels_per_figure": 6
+  },
+  "chart_revision": "Three horizontal panels; directly labelled medians and repetitions; explicit axes. Measurement data unchanged."
 }

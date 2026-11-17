@@ -41,3 +41,11 @@ python3 build_presentation.py --project /path/to/test3 --out /path/to/new-output
 
 The builder reuses only the existing Assessment 2 file's standard PowerPoint theme/layout
 infrastructure; all Assessment 3 slide content, diagrams, tables and charts are rebuilt.
+
+## Chart readability revision
+
+Slides 10 and 11 now use three separate condition panels, direct method labels,
+large median values, all three run values, and plotted repetitions plus min–max.
+The GET panels use explicitly labelled 0–6 axes for A/B and 0–60 for C; compare
+the numbers, not bar lengths, across conditions. Delay panels all share 0–50 ms.
+The measurements have not changed.

@@ -79,7 +79,7 @@ Evidence / references: internal/data/jobs.go: committed; assessment3/experiment.
 
 Target time: 45 seconds.
 
-The first required graph plots the HTTP observation GETs started, excluding upload. Each group has all three individual repetitions, its median and minimum–maximum range. SSE used one stream GET in every recorded run. Long polling used six GETs in A, five in B and fifty-four to fifty-five in C, with a median of fifty-five. The graph makes the workload-dependent rise easier to see than the raw table. An open SSE response still holds a handler and subscriber and sends events and heartbeats. These counts do not measure TCP connection establishments or total CPU and memory use.
+The first required graph uses three horizontal panels and directly labels each median. Dots and the printed run values show every repetition; the dark bar marks the median and the horizontal line the minimum–maximum. To keep small counts readable, A and B use a zero-to-six GET axis while C uses zero-to-sixty. Compare labelled numerical values across conditions rather than bar lengths. Upload is excluded. SSE used one stream GET in every recorded run. Long polling used six GETs in A, five in B and fifty-four to fifty-five in C, with a median of fifty-five. The graph makes the workload-dependent rise easier to see than the raw table. An open SSE response still holds a handler and subscriber and sends events and heartbeats. These counts do not measure TCP connection establishments or total CPU and memory use.
 
 Evidence / references: runs.csv; summary.csv; mandatory graph 1; appendices A–C.
 
@@ -87,7 +87,7 @@ Evidence / references: runs.csv; summary.csv; mandatory graph 1; appendices A–
 
 Target time: 45 seconds.
 
-The second required graph plots browser completion-detection delay in milliseconds using the recorded timestamp method. SSE medians were nine, thirteen and nine milliseconds in A, B and C. Long polling medians were ten, ten and twelve. Long polling was faster at the median in B. The forty-five millisecond long-poll repetition in C widens its range; the graph prevents the median from hiding that individual run. With three repetitions and local scheduling, clock and timestamp-placement uncertainty, this does not prove a universal latency advantage. Processing duration is a different metric.
+The second required graph uses three horizontal panels with the same zero-to-fifty millisecond axis. Each method is directly labelled with its median, with all three runs shown as dots and printed below; the line spans minimum to maximum. It plots browser completion-detection delay using the recorded timestamp method. SSE medians were nine, thirteen and nine milliseconds in A, B and C. Long polling medians were ten, ten and twelve. Long polling was faster at the median in B. The forty-five millisecond long-poll repetition in C widens its range; the graph prevents the median from hiding that individual run. With three repetitions and local scheduling, clock and timestamp-placement uncertainty, this does not prove a universal latency advantage. Processing duration is a different metric.
 
 Evidence / references: runs.csv; summary.csv; mandatory graph 2; historical timestamp caveat on slide 9.
 
