@@ -49,3 +49,16 @@ columns, directly labelled method/value pairs, three individual run markers and
 minimum–maximum whiskers. Detailed run tables remain in the appendix. GET axes
 are 0–6 for A/B and 0–60 for C; all delay charts use 0–50 ms. Compare numerical
 values across slides. Data is unchanged. Allow about 20 seconds per chart slide.
+
+## Clean graph slides with explicit axes
+
+All six graph slides follow the supplied clean reference: section label, title,
+chart, method/value labels and page number. Explanatory subtitles and source
+footers are moved to the embedded speaker notes. A compact graphical legend
+identifies median columns, individual runs and minimum–maximum ranges.
+
+- X axis: Observation method.
+- Y axis on GET slides: Observation GETs (count).
+- Y axis on detection slides: Completion-detection delay (ms).
+
+The axes, legend, charts and labels are editable PowerPoint shapes/text.

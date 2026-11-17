@@ -30,7 +30,7 @@ def blank_tree():
  for name,attrs in [('off',{'x':0,'y':0}),('ext',{'cx':0,'cy':0}),('chOff',{'x':0,'y':0}),('chExt',{'cx':0,'cy':0})]:el(x,A,name,attrs)
  return tree
 class Slide:
- def __init__(self,title,section='IMPLEMENTATION',dark=False,subtitle=None,source=None):
+ def __init__(self,title,section='IMPLEMENTATION',dark=False,subtitle=None,source=None,clean=False):
   self.title=title;self.dark=dark;self.root=E.Element(tag(P,'sld'),{'showMasterSp':'0'});c=el(self.root,P,'cSld',{'name':title});solid(el(c,P,'bg').makeelement(tag(P,'bgPr'),{}) if False else el(c.find(tag(P,'bg')) if c.find(tag(P,'bg')) is not None else el(c,P,'bg'),P,'bgPr'),INK if dark else BG)
   self.tree=blank_tree();c.append(self.tree);el(el(self.root,P,'clrMapOvr'),A,'masterClrMapping');self.id=1;self.rels=[];self.img=Image.new('RGB',(1920,1080),'#'+(INK if dark else BG));self.draw=ImageDraw.Draw(self.img);self.notes='';SLIDES.append(self)
   if section:
@@ -38,7 +38,7 @@ class Slide:
    self.text(96,113,1730,96,title,32,WHITE if dark else INK,True)
    if subtitle:self.text(98,203,1710,54,subtitle,17,PALE if dark else MUTED)
   self.line(96,1005,1824,1005,TEAL if dark else LINE,1)
-  self.text(96,1020,1500,36,source or 'CMPS 4191  •  Assessment 3  •  Daryn Forman',10,PALE if dark else MUTED)
+  if not clean:self.text(96,1020,1500,36,source or 'CMPS 4191  •  Assessment 3  •  Daryn Forman',10,PALE if dark else MUTED)
   self.text(1740,1017,84,40,f'{len(SLIDES):02}',12,PALE if dark else MUTED,align='right')
  def shape(self,x,y,w,h,fill=WHITE,outline=None,kind='rect',stroke=1):
   self.id+=1;s=el(self.tree,P,'sp');n=el(s,P,'nvSpPr');el(n,P,'cNvPr',{'id':self.id,'name':f'{kind} {self.id}'});el(n,P,'cNvSpPr');el(n,P,'nvPr');sp=el(s,P,'spPr');tf=el(sp,A,'xfrm');el(tf,A,'off',{'x':emu(x),'y':emu(y)});el(tf,A,'ext',{'cx':emu(w),'cy':emu(h)});el(el(sp,A,'prstGeom',{'prst':kind}),A,'avLst');solid(sp,fill) if fill else el(sp,A,'noFill');ln=el(sp,A,'ln',{'w':emu(stroke)});solid(ln,outline) if outline else el(ln,A,'noFill')
@@ -68,6 +68,16 @@ class Slide:
    yy=y+i*leading;xx=x if align=='left' else x+(w-f.getlength(line))/2 if align=='center' else x+w-f.getlength(line)
    self.draw.text((round(xx),round(yy)),line,font=f,fill='#'+color,anchor='lt')
   return s
+ def vertical_text(self,cx,cy,width,height,text,pt=19,color=MUTED):
+  before=self.img.copy()
+  shape=self.text(cx-width/2,cy-height/2,width,height,text,pt,color,align='center')
+  shape.find(tag(P,'spPr')).find(tag(A,'xfrm')).set('rot','16200000')
+  self.img=before;self.draw=ImageDraw.Draw(self.img)
+  layer=Image.new('RGBA',(width,height),(0,0,0,0));d=ImageDraw.Draw(layer);f=font(pt)
+  d.text(((width-f.getlength(text))/2,0),text,font=f,fill='#'+color,anchor='lt')
+  layer=layer.rotate(90,expand=True)
+  self.img.paste(layer,(round(cx-layer.width/2),round(cy-layer.height/2)),layer)
+  return shape
  def line(self,x1,y1,x2,y2,color=LINE,width=2):
   self.id+=1;s=el(self.tree,P,'cxnSp');nv=el(s,P,'nvCxnSpPr');el(nv,P,'cNvPr',{'id':self.id,'name':f'Line {self.id}'});el(nv,P,'cNvCxnSpPr');el(nv,P,'nvPr');sp=el(s,P,'spPr');tf=el(sp,A,'xfrm',{'flipH':int(x2<x1),'flipV':int(y2<y1)});el(tf,A,'off',{'x':emu(min(x1,x2)),'y':emu(min(y1,y2))});el(tf,A,'ext',{'cx':emu(abs(x2-x1)),'cy':emu(abs(y2-y1))});el(el(sp,A,'prstGeom',{'prst':'line'}),A,'avLst');solid(el(sp,A,'ln',{'w':emu(width)}),color);self.draw.line((round(x1),round(y1),round(x2),round(y2)),fill='#'+color,width=max(1,round(width)))
  def picture(self,path,x,y,w,h):
@@ -188,12 +198,19 @@ for metric in ['observation_gets','detection_ms']:
           ('detection_ms','B'):'Long polling had the lower recorded median: 10 ms versus 13 ms.',
           ('detection_ms','C'):'Long polling ranged from 12–45 ms; SSE ranged from 8–20 ms.'}
   title=workload+(': observation GETs' if is_get else ': completion-detection delay')
-  s=Slide(title,section='MEASURED RESULTS / CONDITION '+condition,subtitle=labels[metric,condition],source='Recorded suite: 8 Nov 2026  •  3 runs per method  •  Historical headless build  •  Source: runs.csv')
-  s.text(98,263,1724,48,'Columns: median   •   Circles: individual runs   •   Whiskers: minimum–maximum',18,MUTED)
+  s=Slide(title,section='MEASURED RESULTS / CONDITION '+condition,clean=True)
+  # Compact graphical legend; explanations and provenance live in speaker notes.
+  s.shape(1070,267,32,22,INK);s.text(1117,258,160,44,'Median',16,MUTED)
+  s.shape(1301,264,25,25,WHITE,outline=INK,kind='ellipse',stroke=2);s.text(1341,258,110,44,'Run',16,MUTED)
+  s.line(1479,277,1539,277,INK,3);s.line(1479,266,1479,288,INK,2);s.line(1539,266,1539,288,INK,2)
+  s.text(1558,258,180,44,'Range',16,MUTED)
   limit=(6 if condition in 'AB' else 60) if is_get else 50
   ticks=([0,1,2,3,4,5,6] if condition in 'AB' else [0,10,20,30,40,50,60]) if is_get else [0,10,20,30,40,50]
-  top=365;bottom=785;Y=lambda v:bottom-float(v)/limit*(bottom-top)
-  s.text(99,321,1710,42,'Observation HTTP GET count' if is_get else 'Completion-detection delay (milliseconds)',17,MUTED)
+  top=340;bottom=760;Y=lambda v:bottom-float(v)/limit*(bottom-top)
+  s.vertical_text(57,550,600,56,'Observation GETs (count)' if is_get else 'Completion-detection delay (ms)',19)
+  s.line(205,top,205,bottom,MUTED,2)
+  s.line(205,bottom,1780,bottom,MUTED,2)
+  s.text(205,950,1575,49,'Observation method',19,MUTED,align='center')
   for tick in ticks:
    yy=Y(tick);s.line(205,yy,1780,yy,LINE,1)
    s.text(100,yy-19,78,49,str(tick),20,MUTED,align='right')
@@ -207,10 +224,10 @@ for metric in ['observation_gets','detection_ms']:
    for rep,value in enumerate(vals):
     xx=center+(rep-1)*58
     s.shape(xx-13,Y(value)-13,26,26,WHITE,outline=INK,kind='ellipse',stroke=3)
-   s.text(center-320,822,640,72,'SSE' if mode=='sse' else 'Long polling',26,col,True,align='center')
+   s.text(center-320,797,640,67,'SSE' if mode=='sse' else 'Long polling',26,col,True,align='center')
    value=n(med)+(' GET' if is_get and med==1 else ' GETs' if is_get else ' ms')
-   s.text(center-320,893,640,88,value,34,INK,True,align='center')
-  s.note(20,'Condition '+condition+': '+workload+'. '+labels[metric,condition]+   ' The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. '+   ('Observation GETs exclude the upload POST and count HTTP requests, not TCP connections. A and B use a zero-to-six GET axis and C uses zero-to-sixty, so compare numerical values rather than column heights across those slides. Fewer GETs do not establish lower total resource use.' if is_get else    'All three detection slides share the zero-to-fifty millisecond scale. These are local measurements with three repetitions and timing uncertainty. They do not establish a universal speed advantage. Processing duration is separate. The historical build used slightly different receipt-timestamp placement between the modes; see slide 9.'),   'assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph '+('1' if is_get else '2')+'.')
+   s.text(center-320,861,640,82,value,34,INK,True,align='center')
+  s.note(20,'Condition '+condition+': '+workload+'. '+labels[metric,condition]+   ' The vertical axis is explicitly labelled with count or milliseconds and the horizontal axis is Observation method. The compact legend denotes median columns, individual runs and min–max ranges. Slide subtitles and source footers are intentionally omitted; recorded source, build caveats and interpretation remain here in the notes. The coloured column height is the median. The three white circles are all individual repetitions, placed side by side when values repeat. The black whisker spans minimum to maximum. Exact values are in the run tables in appendix slides 20–22. '+   ('Observation GETs exclude the upload POST and count HTTP requests, not TCP connections. A and B use a zero-to-six GET axis and C uses zero-to-sixty, so compare numerical values rather than column heights across those slides. Fewer GETs do not establish lower total resource use.' if is_get else    'All three detection slides share the zero-to-fifty millisecond scale. These are local measurements with three repetitions and timing uncertainty. They do not establish a universal speed advantage. Processing duration is separate. The historical build used slightly different receipt-timestamp placement between the modes; see slide 9.'),   'assessment3/results/measured-suite/runs.csv and summary.csv; mandatory graph '+('1' if is_get else '2')+'.')
 
 # 12 — summary table
 s=Slide('The summary table anchors both graphs.',section='MEASURED RESULTS',subtitle='Medians; brackets show minimum–maximum ranges. Every repetition is in the appendix.',source='Source: measured-suite/summary.csv  •  Full underlying records: runs.csv + per-run client.json/server.log')

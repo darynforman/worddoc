@@ -13,8 +13,10 @@
   "package_validation": {
     "xml_parts_parsed": 130,
     "all_relationships_resolve": true,
-    "notes_slides": 24,
     "chart_slides": 6,
-    "individual_run_markers_per_chart": 6
+    "both_axes_labelled": true,
+    "run_markers_per_chart": 6,
+    "non_chart_slides_unchanged": true,
+    "explanatory_chart_subtitles_and_footers_removed": true
   }
 }
