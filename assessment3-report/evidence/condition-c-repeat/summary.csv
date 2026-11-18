@@ -1,0 +1,3 @@
+condition,mode,runs,observation_gets_median,observation_gets_min,observation_gets_max,detection_ms_median,detection_ms_min,detection_ms_max,processing_ms_median,processing_ms_min,processing_ms_max,observation_db_reads_median,observation_db_reads_min,observation_db_reads_max,distinct_versions_median,distinct_versions_min,distinct_versions_max,stream_duration_ms_median,stream_duration_ms_min,stream_duration_ms_max,peak_sse_handlers_median,peak_sse_handlers_min,peak_sse_handlers_max
+C,long,3,55.0,54.0,55.0,12.0,12.0,45.0,10230.14,10221.532,10362.847,110.0,106.0,110.0,55.0,54.0,55.0,0.0,0.0,0.0,0.0,0.0,0.0
+C,sse,3,1.0,1.0,1.0,9.0,8.0,20.0,10244.202,10232.089,10683.832,56.0,56.0,56.0,55.0,54.0,55.0,10709.0,10304.0,11361.0,1.0,1.0,1.0

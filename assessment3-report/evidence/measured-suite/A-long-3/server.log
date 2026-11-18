@@ -1,0 +1,18 @@
+time=2026-11-08T11:28:43.931-06:00 level=INFO msg="database connection pool established" worker_delay=30s simulation_interval=0s
+time=2026-11-08T11:28:43.931-06:00 level=INFO msg="starting server" addr=:4403 env=development
+time=2026-11-08T11:28:44.304-06:00 level=INFO msg=job_commit job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce version=1 status=queued stage=starting variants_completed=0 simulation_step=0 commit_ms=1794158924304
+time=2026-11-08T11:28:44.314-06:00 level=INFO msg=observation job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce db_reads=1
+time=2026-11-08T11:28:44.934-06:00 level=INFO msg=job_commit job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce version=2 status=processing stage=starting variants_completed=0 simulation_step=0 commit_ms=1794158924933
+time=2026-11-08T11:28:44.934-06:00 level=INFO msg="job processing" job_id=01a1bc34-920d-7d43-a700-8b567e03ebda
+time=2026-11-08T11:28:44.934-06:00 level=INFO msg=observation job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce db_reads=2
+time=2026-11-08T11:29:04.941-06:00 level=INFO msg=observation job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce db_reads=2
+time=2026-11-08T11:29:15.019-06:00 level=INFO msg=job_commit job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce version=3 status=processing stage=thumbnail_ready variants_completed=1 simulation_step=0 commit_ms=1794158955019
+time=2026-11-08T11:29:15.022-06:00 level=INFO msg=observation job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce db_reads=2
+time=2026-11-08T11:29:15.072-06:00 level=INFO msg=job_commit job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce version=4 status=processing stage=preview_ready variants_completed=2 simulation_step=0 commit_ms=1794158955072
+time=2026-11-08T11:29:15.074-06:00 level=INFO msg=observation job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce db_reads=2
+time=2026-11-08T11:29:15.158-06:00 level=INFO msg=job_commit job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce version=5 status=processing stage=display_ready variants_completed=3 simulation_step=0 commit_ms=1794158955158
+time=2026-11-08T11:29:15.161-06:00 level=INFO msg=job_commit job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce version=6 status=completed stage=display_ready variants_completed=3 simulation_step=0 commit_ms=1794158955161
+time=2026-11-08T11:29:15.161-06:00 level=INFO msg="job completed" job_id=01a1bc34-920d-7d43-a700-8b567e03ebda
+time=2026-11-08T11:29:15.171-06:00 level=INFO msg=observation job_id=61e73d16-152c-4826-ad7a-1dd19fded4ce db_reads=3
+time=2026-11-08T11:29:15.367-06:00 level=INFO msg="caught signal" signal=terminated
+time=2026-11-08T11:29:21.280-06:00 level=INFO msg="stopped server"

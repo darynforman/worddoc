@@ -1,0 +1,97 @@
+{
+  "job": {
+    "version": 6,
+    "stage": "display_ready",
+    "variants_completed": 3,
+    "simulation_step": 0,
+    "id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+    "image_id": "5f66d913-9ea6-48fa-9811-8b1eb82fe2d3",
+    "status": "completed",
+    "queued_at": "2026-11-08T11:28:12.795331-06:00",
+    "started_at": "2026-11-08T11:28:13.433091-06:00",
+    "completed_at": "2026-11-08T11:28:43.647702-06:00",
+    "failed_at": null,
+    "variants": [
+      {
+        "name": "thumbnail",
+        "width": 150,
+        "height": 150,
+        "size_bytes": 10410,
+        "url": "/v1/images/5f66d913-9ea6-48fa-9811-8b1eb82fe2d3/variants/thumbnail"
+      },
+      {
+        "name": "preview",
+        "width": 800,
+        "height": 533,
+        "size_bytes": 143153,
+        "url": "/v1/images/5f66d913-9ea6-48fa-9811-8b1eb82fe2d3/variants/preview"
+      },
+      {
+        "name": "display",
+        "width": 1200,
+        "height": 800,
+        "size_bytes": 281077,
+        "url": "/v1/images/5f66d913-9ea6-48fa-9811-8b1eb82fe2d3/variants/display"
+      }
+    ],
+    "status_url": "/v1/jobs/ba475da7-94a8-4a59-95fe-8369eff02a91"
+  },
+  "entries": [
+    {
+      "kind": "sse_session",
+      "request_id": 1,
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "start_ms": 1794158892803,
+      "outcome": "terminal",
+      "end_ms": 1794158923659
+    },
+    {
+      "kind": "sse_open",
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "receipt_ms": 1794158892813
+    },
+    {
+      "kind": "job-update",
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "version": 1,
+      "status": "queued",
+      "receipt_ms": 1794158892813
+    },
+    {
+      "kind": "job-update",
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "version": 2,
+      "status": "processing",
+      "receipt_ms": 1794158893434
+    },
+    {
+      "kind": "job-update",
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "version": 3,
+      "status": "processing",
+      "receipt_ms": 1794158923515
+    },
+    {
+      "kind": "job-update",
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "version": 4,
+      "status": "processing",
+      "receipt_ms": 1794158923557
+    },
+    {
+      "kind": "job-update",
+      "job_id": "ba475da7-94a8-4a59-95fe-8369eff02a91",
+      "mode": "sse",
+      "version": 6,
+      "status": "completed",
+      "receipt_ms": 1794158923657
+    }
+  ],
+  "done": true
+}

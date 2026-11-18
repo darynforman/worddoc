@@ -1,0 +1,3 @@
+{
+  "C": "SSE should carry frequent updates in one stream; long polling may need many GETs or skip coalesced versions. Request counts alone cannot establish total resource cost."
+}

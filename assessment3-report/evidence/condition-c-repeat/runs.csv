@@ -1,0 +1,7 @@
+condition,mode,repetition,job_id,observation_gets,stream_gets,job_update_events,heartbeat_comments,baseline_version,terminal_version,distinct_versions,version_gaps,processing_ms,detection_ms,observation_db_reads,stream_duration_ms,peak_sse_handlers,status
+C,sse,1,1736536e-9be8-4333-8672-c7966b4690b2,1,1,54,1,1,56,54,"[15, 16]",10232.089,9,56,10304,1,completed
+C,long,1,ff3aa596-1a3b-486c-94f6-b1901751bde8,54,0,0,0,1,56,54,"[24, 55]",10362.847,45,106,0,0,completed
+C,long,2,5c5c281b-7dec-45d5-a245-77ebceb7901c,55,0,0,0,1,56,55,[55],10230.14,12,110,0,0,completed
+C,sse,2,1464a9f4-c47e-4718-b1dd-9e6eb9a9810c,1,1,55,1,1,56,55,[55],10244.202,8,56,10709,1,completed
+C,sse,3,c011d70c-8883-4c00-bad5-2c63e2cfcadb,1,1,55,1,1,56,55,[55],10683.832,20,56,11361,1,completed
+C,long,3,abc8a5ae-ecd5-4ac0-a713-ab2852f7d650,55,0,0,0,1,56,55,[55],10221.532,12,110,0,0,completed

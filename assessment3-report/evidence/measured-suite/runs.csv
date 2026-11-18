@@ -1,0 +1,19 @@
+condition,mode,repetition,job_id,observation_gets,stream_gets,job_update_events,heartbeat_comments,baseline_version,terminal_version,distinct_versions,version_gaps,processing_ms,detection_ms,observation_db_reads,stream_duration_ms,peak_sse_handlers,status
+A,sse,1,495bcbd4-6dc2-4a9d-a70b-1bff1bf04e77,1,1,6,3,1,6,6,[],31959.422,19,7,32053,1,completed
+A,long,1,06c10d7a-1a94-4653-850b-20a2aa200d3c,6,0,0,0,1,6,5,[5],30277.1,8,12,0,0,completed
+A,long,2,d1d90a1e-9f44-4efd-9c7d-c6b4473fc0ed,6,0,0,0,1,6,5,[5],30306.98,10,12,0,0,completed
+A,sse,2,e72a4723-6f61-4618-885f-5d1ccdeb6a69,1,1,5,3,1,6,5,[5],30215.201,9,6,30686,1,completed
+A,sse,3,ba475da7-94a8-4a59-95fe-8369eff02a91,1,1,5,3,1,6,5,[5],30214.611,9,6,30849,1,completed
+A,long,3,61e73d16-152c-4826-ad7a-1dd19fded4ce,6,0,0,0,1,6,5,[5],30226.729,14,12,0,0,completed
+B,sse,1,eba12079-3737-41bd-b6a5-3d3374abaaa9,1,1,5,0,1,6,5,[5],445.915,8,6,1057,1,completed
+B,long,1,25541655-9f38-455b-83ac-8fae3f5ab7ec,5,0,0,0,1,6,5,[5],335.823,10,10,0,0,completed
+B,long,2,767ae66d-263e-482f-8788-db7fe0100698,5,0,0,0,1,6,5,[5],389.88,10,10,0,0,completed
+B,sse,2,aa71860c-07a9-4f5d-96b7-c3deef3de328,1,1,5,0,1,6,5,[5],229.084,13,6,858,1,completed
+B,sse,3,f080c2e9-e827-407e-a026-e9ddb288396d,1,1,5,0,1,6,5,[5],241.117,14,6,828,1,completed
+B,long,3,26783884-0105-45a2-b814-5d32902839cd,5,0,0,0,1,6,5,[5],215.535,11,10,0,0,completed
+C,sse,1,1736536e-9be8-4333-8672-c7966b4690b2,1,1,54,1,1,56,54,"[15, 16]",10232.089,9,56,10304,1,completed
+C,long,1,ff3aa596-1a3b-486c-94f6-b1901751bde8,54,0,0,0,1,56,54,"[24, 55]",10362.847,45,106,0,0,completed
+C,long,2,5c5c281b-7dec-45d5-a245-77ebceb7901c,55,0,0,0,1,56,55,[55],10230.14,12,110,0,0,completed
+C,sse,2,1464a9f4-c47e-4718-b1dd-9e6eb9a9810c,1,1,55,1,1,56,55,[55],10244.202,8,56,10709,1,completed
+C,sse,3,c011d70c-8883-4c00-bad5-2c63e2cfcadb,1,1,55,1,1,56,55,[55],10683.832,20,56,11361,1,completed
+C,long,3,abc8a5ae-ecd5-4ac0-a713-ab2852f7d650,55,0,0,0,1,56,55,[55],10221.532,12,110,0,0,completed

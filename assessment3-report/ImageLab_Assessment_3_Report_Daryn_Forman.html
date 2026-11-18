@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>ImageLab Assessment 3 Report — Daryn Forman</title><style>@page{size:A4;margin:15mm 17mm}*{box-sizing:border-box}body{font:10.5pt/1.32 Arial,sans-serif;color:#152d2b;margin:0}section{break-after:page}section:last-child{break-after:auto}h1{font-size:21pt;line-height:1.1;margin:0 0 3mm}h2{font-size:12pt;margin:4mm 0 1.5mm;color:#147d70}p{margin:0 0 2.5mm}.subtitle{font-size:12pt;margin-bottom:2mm}.meta{font-size:9pt;color:#60716e;border-bottom:1px solid #dae3de;padding-bottom:3mm;margin-bottom:4mm}.small{font-size:8.5pt;color:#60716e}.caption{font-size:9.5pt;margin:1mm 0 4mm}img{display:block;width:100%;height:auto}table{width:100%;border-collapse:collapse;font-size:9.5pt;margin:2mm 0 3mm}th{text-align:left;background:#e7f1ed}th,td{padding:1.7mm 2.5mm;border-bottom:1px solid #dae3de}</style><body>
+<section>
+<h1 class="title">ImageLab Assessment 3</h1>
+<p class="subtitle">Server-Sent Events compared with long polling</p>
+<p class="meta">Daryn Forman | CMPS 4191 | 18 November 2026</p>
+<h2 class="heading">Aim and predictions</h2>
+<p class="p">I added Server-Sent Events (SSE) to ImageLab and compared it with long polling. SSE can deliver several job updates through one open response. Long polling starts another request after each response. Both watch the same image-processing job; neither performs the processing.</p>
+<p class="p">For condition A, I expected SSE to keep one stream during a 30-second quiet period, while long polling could time out and request again. For B, I expected both methods to deliver real progress quickly. For C, I expected SSE to use fewer requests during frequent updates. I did not assume that fewer requests would mean lower total resource use.</p>
+<h2 class="heading">Method</h2>
+<p class="p">I used three conditions: A held an active job quiet for 30 seconds before real processing; B processed the three real image variants; C sent labelled simulated updates every 200 ms for 10 seconds, then did real processing. Simulated steps were separate from the number of stored variants.</p>
+<p class="p">There were 18 runs: three repetitions for each method in each condition. The selected runs used the same image and settings, one observer, and an empty queue at the start. I alternated method order. Counts cover the whole observation period and exclude the upload POST.</p>
+<p class="p">Detection delay was browser receipt time minus the server time recorded just after completion was saved. Processing duration was measured separately, from the worker starting to the recorded finish time. Browser and server ran on the same computer.</p>
+<h2 class="heading">Summary of recorded results</h2>
+<table><thead><tr><th>Condition</th><th>Method</th><th>GETs</th><th>Detection delay (ms)</th></tr></thead><tbody><tr><td>A</td><td>SSE</td><td>1 [1–1]</td><td>9 [9–19]</td></tr><tr><td>A</td><td>Long polling</td><td>6 [6–6]</td><td>10 [8–14]</td></tr><tr><td>B</td><td>SSE</td><td>1 [1–1]</td><td>13 [8–14]</td></tr><tr><td>B</td><td>Long polling</td><td>5 [5–5]</td><td>10 [10–11]</td></tr><tr><td>C</td><td>SSE</td><td>1 [1–1]</td><td>9 [8–20]</td></tr><tr><td>C</td><td>Long polling</td><td>55 [54–55]</td><td>12 [12–45]</td></tr></tbody></table>
+<p class="small">Values are medians; brackets show minimum–maximum. The complete 18-run table and raw client/server logs are included in evidence/measured-suite/.</p>
+</section>
+<section>
+<h1 class="title">Results</h1>
+<p class="small">In both graphs, columns show medians, circles show all three repetitions, and whiskers show minimum–maximum. Teal is SSE; purple is long polling.</p>
+<img src="observation_gets.png" alt="Measured observation gets.png">
+<p class="caption">Figure 1. SSE used one observation GET in every run. Long-polling medians were 6, 5 and 55 for A, B and C. The large increase in C is easier to see in the graph than in the table. The smaller A/B values are labelled directly.</p>
+<img src="detection_ms.png" alt="Measured detection ms.png">
+<p class="caption">Figure 2. Both methods detected completion quickly. SSE had lower median delays in A and C, but long polling had the lower median in B. The 45 ms long-polling result in C shows why the individual runs and ranges matter.</p>
+<p class="small">The graphs use the same recorded values as the summary and run tables. Processing duration is not included in detection delay.</p>
+</section>
+<section>
+<h1 class="title">Discussion and recommendation</h1>
+<h2 class="heading">What the results show</h2>
+<p class="p">My prediction about request counts was supported. SSE used one stream even when updates were frequent, while long polling sent a new GET after responses. The results did not show that SSE was always faster: in B, its median detection delay was 13 ms compared with 10 ms for long polling. I would not treat a few milliseconds in this small local test as a general speed advantage.</p>
+<p class="p">Some intermediate versions were skipped. For example, C–SSE–1 received 54 distinct versions between version 1 and version 56, missing versions 15 and 16. The completed snapshot still arrived. These responses describe current state rather than a history of every change, so a version gap alone does not mean the stored result was lost.</p>
+<h2 class="heading">Resources and limitations</h2>
+<p class="p">SSE still holds a server handler and subscriber, reads the database and sends events and heartbeat comments. In C, median observation reads were 56 for SSE and 110 for long polling. The median SSE stream lasted 10.709 seconds, with one heartbeat and a peak of one active handler. These values describe one observer; I did not measure total CPU, memory, TCP connection counts or large-scale capacity.</p>
+<p class="p">The runs were recorded on 8 November 2026 using headless Firefox on a local connection. A visible foreground-browser rerun is still outstanding. The data also predates the final event-format fixes and the change that records receipt time after decoding in both modes. In the recorded build, SSE stamped receipt before parsing, while long polling stamped it after decoding. I have kept the original measurements instead of presenting them as new results.</p>
+<p class="p">A computer-clock problem affected an original C attempt. I excluded that attempt and repeated all six C runs. The selected dataset combines the original A/B runs with the repeated C runs; the selection note and excluded records are retained. With only three repetitions per group, these findings should be read cautiously.</p>
+<h2 class="heading">Recommendation</h2>
+<p class="p">I would use SSE when an application needs regular progress updates over an open response. I would keep long polling available where ordinary request/response handling is more convenient. The main benefit shown here is fewer observation requests, especially with frequent updates, rather than a guaranteed improvement in speed or total resource use.</p>
+<p class="small">Reproduction: use assessment3/README.md and experiment.py in the ImageLab project. Tables and raw records are under evidence/measured-suite/. These are performance results; the later classroom interruption and failed-job checks are separate demonstrations.</p>
+</section>
+</body></html>

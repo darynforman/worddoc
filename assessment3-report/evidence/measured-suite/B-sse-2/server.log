@@ -1,0 +1,19 @@
+time=2026-11-08T11:29:26.437-06:00 level=INFO msg="database connection pool established" worker_delay=0s simulation_interval=0s
+time=2026-11-08T11:29:26.437-06:00 level=INFO msg="starting server" addr=:4403 env=development
+time=2026-11-08T11:29:26.811-06:00 level=INFO msg=job_commit job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 version=1 status=queued stage=starting variants_completed=0 simulation_step=0 commit_ms=1794158966811
+time=2026-11-08T11:29:26.823-06:00 level=INFO msg=sse_open job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 active=1 start_ms=1794158966823
+time=2026-11-08T11:29:26.824-06:00 level=INFO msg=sse_frame job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 kind=job-update version=1 sent_ms=1794158966824
+time=2026-11-08T11:29:27.440-06:00 level=INFO msg=job_commit job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 version=2 status=processing stage=starting variants_completed=0 simulation_step=0 commit_ms=1794158967440
+time=2026-11-08T11:29:27.440-06:00 level=INFO msg="job processing" job_id=01a1bc35-3819-7af5-b867-bf9dca42795a
+time=2026-11-08T11:29:27.443-06:00 level=INFO msg=sse_frame job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 kind=job-update version=2 sent_ms=1794158967443
+time=2026-11-08T11:29:27.526-06:00 level=INFO msg=job_commit job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 version=3 status=processing stage=thumbnail_ready variants_completed=1 simulation_step=0 commit_ms=1794158967526
+time=2026-11-08T11:29:27.529-06:00 level=INFO msg=sse_frame job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 kind=job-update version=3 sent_ms=1794158967529
+time=2026-11-08T11:29:27.572-06:00 level=INFO msg=job_commit job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 version=4 status=processing stage=preview_ready variants_completed=2 simulation_step=0 commit_ms=1794158967572
+time=2026-11-08T11:29:27.578-06:00 level=INFO msg=sse_frame job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 kind=job-update version=4 sent_ms=1794158967578
+time=2026-11-08T11:29:27.668-06:00 level=INFO msg=job_commit job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 version=5 status=processing stage=display_ready variants_completed=3 simulation_step=0 commit_ms=1794158967668
+time=2026-11-08T11:29:27.669-06:00 level=INFO msg=job_commit job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 version=6 status=completed stage=display_ready variants_completed=3 simulation_step=0 commit_ms=1794158967669
+time=2026-11-08T11:29:27.669-06:00 level=INFO msg="job completed" job_id=01a1bc35-3819-7af5-b867-bf9dca42795a
+time=2026-11-08T11:29:27.681-06:00 level=INFO msg=sse_frame job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 kind=job-update version=6 sent_ms=1794158967681
+time=2026-11-08T11:29:27.681-06:00 level=INFO msg=sse_close job_id=aa71860c-07a9-4f5d-96b7-c3deef3de328 db_reads=6 duration_ms=858 active=0 peak_active=1
+time=2026-11-08T11:29:27.892-06:00 level=INFO msg="caught signal" signal=terminated
+time=2026-11-08T11:29:27.892-06:00 level=INFO msg="stopped server"

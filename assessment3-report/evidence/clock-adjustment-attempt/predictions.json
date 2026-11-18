@@ -1,0 +1,5 @@
+{
+  "A": "Both methods should receive few snapshots during the 30s quiet phase; SSE should keep one stream while long polling expires and starts another GET.",
+  "B": "Both methods should promptly detect real progress; SSE can deliver multiple snapshots in one GET, while long polling starts another GET after each response.",
+  "C": "SSE should carry frequent updates in one stream; long polling may need many GETs or skip coalesced versions. Request counts alone cannot establish total resource cost."
+}

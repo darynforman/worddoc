@@ -1,0 +1,17 @@
+time=2026-11-08T11:29:29.519-06:00 level=INFO msg="database connection pool established" worker_delay=0s simulation_interval=0s
+time=2026-11-08T11:29:29.519-06:00 level=INFO msg="starting server" addr=:4403 env=development
+time=2026-11-08T11:29:29.954-06:00 level=INFO msg=job_commit job_id=26783884-0105-45a2-b814-5d32902839cd version=1 status=queued stage=starting variants_completed=0 simulation_step=0 commit_ms=1794158969954
+time=2026-11-08T11:29:29.973-06:00 level=INFO msg=observation job_id=26783884-0105-45a2-b814-5d32902839cd db_reads=1
+time=2026-11-08T11:29:30.522-06:00 level=INFO msg=job_commit job_id=26783884-0105-45a2-b814-5d32902839cd version=2 status=processing stage=starting variants_completed=0 simulation_step=0 commit_ms=1794158970522
+time=2026-11-08T11:29:30.522-06:00 level=INFO msg="job processing" job_id=01a1bc35-4461-7820-97a6-1662904a60c9
+time=2026-11-08T11:29:30.524-06:00 level=INFO msg=observation job_id=26783884-0105-45a2-b814-5d32902839cd db_reads=2
+time=2026-11-08T11:29:30.594-06:00 level=INFO msg=job_commit job_id=26783884-0105-45a2-b814-5d32902839cd version=3 status=processing stage=thumbnail_ready variants_completed=1 simulation_step=0 commit_ms=1794158970594
+time=2026-11-08T11:29:30.596-06:00 level=INFO msg=observation job_id=26783884-0105-45a2-b814-5d32902839cd db_reads=2
+time=2026-11-08T11:29:30.637-06:00 level=INFO msg=job_commit job_id=26783884-0105-45a2-b814-5d32902839cd version=4 status=processing stage=preview_ready variants_completed=2 simulation_step=0 commit_ms=1794158970637
+time=2026-11-08T11:29:30.641-06:00 level=INFO msg=observation job_id=26783884-0105-45a2-b814-5d32902839cd db_reads=2
+time=2026-11-08T11:29:30.735-06:00 level=INFO msg=job_commit job_id=26783884-0105-45a2-b814-5d32902839cd version=5 status=processing stage=display_ready variants_completed=3 simulation_step=0 commit_ms=1794158970735
+time=2026-11-08T11:29:30.737-06:00 level=INFO msg=job_commit job_id=26783884-0105-45a2-b814-5d32902839cd version=6 status=completed stage=display_ready variants_completed=3 simulation_step=0 commit_ms=1794158970737
+time=2026-11-08T11:29:30.737-06:00 level=INFO msg="job completed" job_id=01a1bc35-4461-7820-97a6-1662904a60c9
+time=2026-11-08T11:29:30.746-06:00 level=INFO msg=observation job_id=26783884-0105-45a2-b814-5d32902839cd db_reads=3
+time=2026-11-08T11:29:30.939-06:00 level=INFO msg="caught signal" signal=terminated
+time=2026-11-08T11:29:36.250-06:00 level=INFO msg="stopped server"

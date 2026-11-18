@@ -1,0 +1,501 @@
+{
+  "job": {
+    "version": 56,
+    "stage": "display_ready",
+    "variants_completed": 3,
+    "simulation_step": 50,
+    "id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+    "image_id": "ba86848f-d653-437b-aae6-2d8617ef8c41",
+    "status": "completed",
+    "queued_at": "2026-11-08T13:44:13.631469-06:00",
+    "started_at": "2026-11-08T13:44:14.304085-06:00",
+    "completed_at": "2026-11-08T13:44:24.987917-06:00",
+    "failed_at": null,
+    "variants": [
+      {
+        "name": "thumbnail",
+        "width": 150,
+        "height": 150,
+        "size_bytes": 10410,
+        "url": "/v1/images/ba86848f-d653-437b-aae6-2d8617ef8c41/variants/thumbnail"
+      },
+      {
+        "name": "preview",
+        "width": 800,
+        "height": 533,
+        "size_bytes": 143153,
+        "url": "/v1/images/ba86848f-d653-437b-aae6-2d8617ef8c41/variants/preview"
+      },
+      {
+        "name": "display",
+        "width": 1200,
+        "height": 800,
+        "size_bytes": 281077,
+        "url": "/v1/images/ba86848f-d653-437b-aae6-2d8617ef8c41/variants/display"
+      }
+    ],
+    "status_url": "/v1/jobs/c011d70c-8883-4c00-bad5-2c63e2cfcadb"
+  },
+  "entries": [
+    {
+      "kind": "sse_session",
+      "request_id": 1,
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "start_ms": 1794167053642,
+      "outcome": "terminal",
+      "end_ms": 1794167065011
+    },
+    {
+      "kind": "sse_open",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "receipt_ms": 1794167053645
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 1,
+      "status": "queued",
+      "receipt_ms": 1794167053646
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 2,
+      "status": "processing",
+      "receipt_ms": 1794167054306
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 3,
+      "status": "processing",
+      "receipt_ms": 1794167054508
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 4,
+      "status": "processing",
+      "receipt_ms": 1794167054707
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 5,
+      "status": "processing",
+      "receipt_ms": 1794167054908
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 6,
+      "status": "processing",
+      "receipt_ms": 1794167055113
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 7,
+      "status": "processing",
+      "receipt_ms": 1794167055308
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 8,
+      "status": "processing",
+      "receipt_ms": 1794167055508
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 9,
+      "status": "processing",
+      "receipt_ms": 1794167055708
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 10,
+      "status": "processing",
+      "receipt_ms": 1794167055915
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 11,
+      "status": "processing",
+      "receipt_ms": 1794167056108
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 12,
+      "status": "processing",
+      "receipt_ms": 1794167056308
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 13,
+      "status": "processing",
+      "receipt_ms": 1794167056510
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 14,
+      "status": "processing",
+      "receipt_ms": 1794167056707
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 15,
+      "status": "processing",
+      "receipt_ms": 1794167056909
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 16,
+      "status": "processing",
+      "receipt_ms": 1794167057116
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 17,
+      "status": "processing",
+      "receipt_ms": 1794167057307
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 18,
+      "status": "processing",
+      "receipt_ms": 1794167057508
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 19,
+      "status": "processing",
+      "receipt_ms": 1794167057713
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 20,
+      "status": "processing",
+      "receipt_ms": 1794167057908
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 21,
+      "status": "processing",
+      "receipt_ms": 1794167058108
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 22,
+      "status": "processing",
+      "receipt_ms": 1794167058308
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 23,
+      "status": "processing",
+      "receipt_ms": 1794167058509
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 24,
+      "status": "processing",
+      "receipt_ms": 1794167058708
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 25,
+      "status": "processing",
+      "receipt_ms": 1794167058913
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 26,
+      "status": "processing",
+      "receipt_ms": 1794167059116
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 27,
+      "status": "processing",
+      "receipt_ms": 1794167059310
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 28,
+      "status": "processing",
+      "receipt_ms": 1794167059508
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 29,
+      "status": "processing",
+      "receipt_ms": 1794167059707
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 30,
+      "status": "processing",
+      "receipt_ms": 1794167059907
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 31,
+      "status": "processing",
+      "receipt_ms": 1794167060107
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 32,
+      "status": "processing",
+      "receipt_ms": 1794167060309
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 33,
+      "status": "processing",
+      "receipt_ms": 1794167060507
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 34,
+      "status": "processing",
+      "receipt_ms": 1794167060711
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 35,
+      "status": "processing",
+      "receipt_ms": 1794167060908
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 36,
+      "status": "processing",
+      "receipt_ms": 1794167061107
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 37,
+      "status": "processing",
+      "receipt_ms": 1794167061307
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 38,
+      "status": "processing",
+      "receipt_ms": 1794167061508
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 39,
+      "status": "processing",
+      "receipt_ms": 1794167061711
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 40,
+      "status": "processing",
+      "receipt_ms": 1794167061909
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 41,
+      "status": "processing",
+      "receipt_ms": 1794167062108
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 42,
+      "status": "processing",
+      "receipt_ms": 1794167062307
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 43,
+      "status": "processing",
+      "receipt_ms": 1794167062509
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 44,
+      "status": "processing",
+      "receipt_ms": 1794167062708
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 45,
+      "status": "processing",
+      "receipt_ms": 1794167062910
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 46,
+      "status": "processing",
+      "receipt_ms": 1794167063110
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 47,
+      "status": "processing",
+      "receipt_ms": 1794167063309
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 48,
+      "status": "processing",
+      "receipt_ms": 1794167063508
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 49,
+      "status": "processing",
+      "receipt_ms": 1794167063712
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 50,
+      "status": "processing",
+      "receipt_ms": 1794167063907
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 51,
+      "status": "processing",
+      "receipt_ms": 1794167064110
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 52,
+      "status": "processing",
+      "receipt_ms": 1794167064317
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 53,
+      "status": "processing",
+      "receipt_ms": 1794167064670
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 54,
+      "status": "processing",
+      "receipt_ms": 1794167064791
+    },
+    {
+      "kind": "job-update",
+      "job_id": "c011d70c-8883-4c00-bad5-2c63e2cfcadb",
+      "mode": "sse",
+      "version": 56,
+      "status": "completed",
+      "receipt_ms": 1794167065009
+    }
+  ],
+  "done": true,
+  "clock_check": {
+    "wall_elapsed_ms": 11589.417934417725,
+    "monotonic_elapsed_ms": 11589.419404001092
+  }
+}

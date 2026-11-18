@@ -1,0 +1,14 @@
+{
+  "report_pages_designed": 3,
+  "words": 807,
+  "selected_runs": 18,
+  "summary_rows": 6,
+  "raw_log_pairs": 18,
+  "graphs": 2,
+  "limitations_disclosed": true,
+  "pdf_pages_verified": 3,
+  "docx_xml_valid": true,
+  "raw_values_match_all_18_rows": true,
+  "source_csv_sha256": "01019da147d3c0d6e1a111f735e4e6942e05955b035223581c8cfab61514db28",
+  "pdf_visually_reviewed": true
+}
